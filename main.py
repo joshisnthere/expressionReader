@@ -43,3 +43,12 @@ class ExpressionReaderApp(ctk.CTk):
         self.history_box = ctk.CTkTextbox(self, fg_color=PANEL, height=120, width=700)
         self.history_box.pack(padx=20, pady=(4, 20))
         self.history_box.configure(state="disabled")
+
+        self.mp_face_mesh = mp.solutions.face_mesh
+        self.face_mesh = self.mp_face_mesh.FaceMesh(
+            max_num_faces=1, refine_landmarks=True,
+            min_detection_confidence=0.5, min_tracking_confidence=0.5,
+        )
+        self.cap = cv2.VideoCapture(0)
+        self.last_label = None
+        self._update_frame()
