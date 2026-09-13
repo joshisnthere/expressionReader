@@ -64,3 +64,8 @@ class ExpressionReaderApp(ctk.CTk):
             if results.multi_face_landmarks:
                 landmarks = results.multi_face_landmarks[0].landmark
                 label = logic.classify_expression(landmarks)
+
+            if label != self.last_label:
+                self._log(label)
+                self.last_label = label
+            self.expression_var.set(label)
