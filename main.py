@@ -74,3 +74,12 @@ class ExpressionReaderApp(ctk.CTk):
             photo = ImageTk.PhotoImage(img)
             self.video_label.configure(image=photo)
             self.video_label.image = photo
+
+        self.after(20, self._update_frame)
+
+    def _log(self, label):
+        stamp = datetime.datetime.now().strftime("%H:%M:%S")
+        self.history_box.configure(state="normal")
+        self.history_box.insert("end", f"{stamp}  {label}\n")
+        self.history_box.see("end")
+        self.history_box.configure(state="disabled")
