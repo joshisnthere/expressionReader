@@ -69,3 +69,8 @@ class ExpressionReaderApp(ctk.CTk):
                 self._log(label)
                 self.last_label = label
             self.expression_var.set(label)
+
+            img = Image.fromarray(rgb).resize((720, 460))
+            photo = ImageTk.PhotoImage(img)
+            self.video_label.configure(image=photo)
+            self.video_label.image = photo
