@@ -59,3 +59,8 @@ class ExpressionReaderApp(ctk.CTk):
             frame = cv2.flip(frame, 1)
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = self.face_mesh.process(rgb)
+
+            label = "No face detected"
+            if results.multi_face_landmarks:
+                landmarks = results.multi_face_landmarks[0].landmark
+                label = logic.classify_expression(landmarks)
