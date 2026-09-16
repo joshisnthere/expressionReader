@@ -83,3 +83,12 @@ class ExpressionReaderApp(ctk.CTk):
         self.history_box.insert("end", f"{stamp}  {label}\n")
         self.history_box.see("end")
         self.history_box.configure(state="disabled")
+
+    def destroy(self):
+        self.cap.release()
+        super().destroy()
+
+
+if __name__ == "__main__":
+    app = ExpressionReaderApp()
+    app.mainloop()
