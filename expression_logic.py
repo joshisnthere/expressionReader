@@ -25,3 +25,9 @@ def _eye_aspect_ratio(landmarks, idxs):
     vertical = _dist(p[1], p[5]) + _dist(p[2], p[4])
     horizontal = _dist(p[0], p[3])
     return vertical / (2.0 * horizontal + 1e-6)
+
+
+def classify_expression(landmarks):
+    left_ear = _eye_aspect_ratio(landmarks, LEFT_EYE)
+    right_ear = _eye_aspect_ratio(landmarks, RIGHT_EYE)
+    avg_ear = (left_ear + right_ear) / 2
