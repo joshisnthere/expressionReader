@@ -31,3 +31,17 @@ def classify_expression(landmarks):
     left_ear = _eye_aspect_ratio(landmarks, LEFT_EYE)
     right_ear = _eye_aspect_ratio(landmarks, RIGHT_EYE)
     avg_ear = (left_ear + right_ear) / 2
+
+    mouth_height = _dist(landmarks[MOUTH_TOP], landmarks[MOUTH_BOTTOM])
+    mouth_width = _dist(landmarks[MOUTH_LEFT], landmarks[MOUTH_RIGHT])
+    mouth_ratio = mouth_height / (mouth_width + 1e-6)
+
+    eyebrow_gap = _dist(landmarks[LEFT_EYEBROW], landmarks[LEFT_EYE_TOP])
+
+    if avg_ear < 0.15:
+        return "Eyes closed"
+    if mouth_ratio > 0.45 and eyebrow_gap > 0.045:
+        return "Surprised"
+    if mouth_width > 0.34:
+        return "Smiling"
+    return "Neutral"
